@@ -1,0 +1,135 @@
+
+
+.tutorialHeader
+{
+    text-align: center;
+    font-size:20pt;
+    
+  background-color: floralwhite;
+}
+
+.tutorialContainer
+{
+    text-align: center;
+    padding:20px;
+}
+
+.mat-horizontal-stepper-content
+{
+    font-family: 'KesselNormal' !important;
+}
+
+.boldText
+{
+  font-family: 'KesselBold' !important;
+}
+
+.column15r {
+    float: right;
+    width: 10%;
+    height:100%;
+  }
+
+.column15 {
+    float: left;
+    width: 10%;
+    height:100%;
+  }
+  .column70 {
+    float: left;
+    width: 80%;
+    height: 100%;
+  }
+
+  .rowd{
+      height:100%;
+      width: 100%;
+  }
+  
+  /* Clear floats after the columns */
+  .rowd:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .stepperButtonIcon
+  {
+    font-size: 30pt;
+    height: auto !important;
+    width: auto !important;
+  }
+
+.backButton
+{
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 20px;
+  color: white !important;
+  background: #DB7B89 !important;
+  z-index:999;
+  border-color: white !important;
+}
+
+.forwardButton
+{
+  position: absolute;
+  top: calc(50% - 10px);
+  right: 20px;
+  z-index: 999;
+  color: white !important;
+  background: #DB7B89 !important;
+  border-color: white !important;
+}
+
+  .okButton
+{
+    background:#673ab7;
+    color:white;
+}
+.tutorialButtonContainer
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 97vh;
+}
+.tutorialBlock
+{
+  margin-bottom:30px;
+  font-size:18pt;
+}
+
+.tutorialBlockTop
+{
+  margin-bottom:30px;
+  margin-top:30px;
+  font-size:18pt;
+}
+
+.tutorialBlockSmall
+{
+  margin-bottom:10px;
+  font-size:15pt;
+}
+
+.tutorialBlockSmallTop
+{ 
+  margin-bottom:10px;
+   margin-top:10px;
+  font-size:15pt;
+}
+
+.tutorialCloseButton
+{
+  float:right;
+  cursor: pointer;
+}
+.tutorialCloseButton:hover
+{
+  background-color: lightgray;
+}
+.stepper
+{
+  background-color: floralwhite;
+}

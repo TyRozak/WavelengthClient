@@ -1,0 +1,13 @@
+<div [classList]="helperContainerClassList" (click)="close()" 
+[@fadeOut]="animationState"
+(@fadeOut.start)="onAnimationStart($event)"
+(@fadeOut.done)="onAnimationDone($event)">
+  <div class="helperTextContainer">
+    {{data.message}}
+  </div>
+  <div  [classList]="helperArrowContainerClassList">
+    <div [style.transform]="'rotate(' + angle + 'deg)'">
+      <mat-icon  class="helperArrow">label_important</mat-icon>
+    </div>
+  </div>
+</div>

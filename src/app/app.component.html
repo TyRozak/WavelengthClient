@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span class="wavelengthTitle" (click)="goHome()">WAVELENGTH</span>
+      <span class="fill-remaining-space"></span>
+      <button mat-icon-button class="wavelengthTitle" (click)="goToWavelengthPage()"
+         matTooltip="Go to the real Wavelength homepage! Support the designers by buying from there!">
+        <mat-icon>shopping_cart</mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="menu" >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #settings="matMenu">
+        <mat-checkbox labelPosition="before" #tutorialBox (click)="clickTutorialsEnabled()" checked="true" class="mat-menu-item">Show Tutorials?</mat-checkbox>  
+        <mat-checkbox labelPosition="before" #soundBox (click)="clickSoundEnabled()" checked="true" class="mat-menu-item">Sound Enabled?</mat-checkbox>  
+      </mat-menu>
+ 
+      <mat-menu #menu="matMenu">   
+        <button mat-menu-item  [matMenuTriggerFor]="settings">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </button>
+      <button mat-menu-item (click)="openTutorialDialog()">
+        <mat-icon>menu_book</mat-icon>
+        <span>View Rules</span>
+      </button>
+        <button mat-menu-item (click)="showBugReport()">
+          <mat-icon>bug_report</mat-icon>
+          <span>Report a bug</span>
+        </button>
+        <button mat-menu-item (click)="showAbout()">
+          <mat-icon>extension</mat-icon>
+          <span>About</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet>
+</router-outlet>

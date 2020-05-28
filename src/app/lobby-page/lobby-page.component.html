@@ -1,0 +1,92 @@
+<div class="lobbyContainer">
+
+    <div class="codeHeader">
+        <div class="codeContainer">
+            <div class="codeHeaderTitle">
+                Copy the room code or join URL to send to your friends!
+            </div>
+            <div class="textContainer">
+                <div class="codeText copyCursor" matTooltip="Copy the Room Code" (click)="copyCodeToClipboard()">
+                    {{this.clientService.getRoom() ? this.clientService.getRoom().id : ""}}
+                </div>
+                <div class="iconContainer">
+                    <div class="icon2Cont copyCursor" matTooltip="Copy the Room Code" (click)="copyCodeToClipboard()">
+                        <mat-icon>file_copy</mat-icon>
+                        <span class="smallText">Code</span>
+                    </div>
+                    <div class="icon2Cont copyCursor" matTooltip="Copy the Join URL" (click)="copyUrlToClipboard()">
+                        <mat-icon>link</mat-icon>
+                        <span class="smallText">URL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="teamContainer">
+        <div class="playerContainer">
+            <div class="playerHeader">Team 1 Players</div>
+            <mat-list class="listOverflow">
+                <mat-list-item class="playerCard" *ngFor="let player of (this.clientService.team1 || [])">
+                    <div class="playerItem">
+                        <span class="dot" [ngStyle]="{'background-color': player.color}"></span>
+                        <span [className]="player.id == 'open'? 'playerName flash': 'playerName'" 
+                            [style.text-decoration]="this.clientService.getMe() && this.clientService.getMe().id == player.id? 'underline':''"
+                            [style.font-family]="this.clientService.getMe() && this.clientService.getMe().id == player.id? 'KesselBold':''">
+                        {{player.name}}</span>
+                        <div class="iconContainer2">
+                            <img src="../../assets/crown.png" matTooltip="This player is game controller" class="eyeCon"
+                                [style.display]="player.isGameController? '':'none'">
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="playerContainer">
+            <div class="playerHeader">Team 2 Players</div>
+            <mat-list class="listOverflow">
+                <mat-list-item class="playerCard" *ngFor="let player of (this.clientService.team2 || [])">
+                    <div class="playerItem">
+                        <span class="dot" [ngStyle]="{'background-color': player.color}"></span>
+                        <span [className]="player.id == 'open'? 'playerName flash': 'playerName'" 
+                            [style.text-decoration]="this.clientService.getMe() && this.clientService.getMe().id == player.id? 'underline':''"
+                            [style.font-family]="this.clientService.getMe() && this.clientService.getMe().id == player.id? 'KesselBold':''">
+                        {{player.name}}</span>
+                        <div class="iconContainer2">
+                            <img src="../../assets/crown.png" matTooltip="This player is game controller" class="eyeCon"
+                                [style.display]="player.isGameController? '':'none'">
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    <div class="buttonCont">
+        <button class="wavelengthButton"
+            [disabled]="(currentNumPlayers < 4 || team1Count < 2 || team2Count < 2)  || 
+                        (this.clientService.getMe() && !this.clientService.getMe().isGameController)"
+            mat-button (click)="transitionOut()"
+            [matTooltip]="(this.clientService.getMe() && !this.clientService.getMe().isGameController)? 'Only the Game Controller can start the game':''">
+            Start Game
+        </button>
+        <button class="wavelengthButton" mat-button (click)="updateTeam()">Change Teams</button>
+        <button class="wavelengthButton" mat-button (click)="add9()">Add Fake Players</button>
+    </div>
+</div>
+
+<div class="waveWrapper waveAnimation" #waveWrapper>
+    <div class="waveWrapperInner bgTop">
+        <div class="wave waveTop">
+        </div>
+    </div>
+    <div class="waveWrapperInner bgMiddle">
+        <div class="wave waveMiddle">
+        </div>
+    </div>
+    <div class="waveWrapperInner bgBottom">
+        <div class="wave waveBottom" >
+        </div>
+    </div>
+</div>
+<div #transitionBlock class="transitionBlock">
+</div>

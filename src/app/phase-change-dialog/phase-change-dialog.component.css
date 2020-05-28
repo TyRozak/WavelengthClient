@@ -1,0 +1,92 @@
+  .overlay-content {
+    padding: 1em;
+    height:50vh;
+    width: 50vw;
+    background-color: floralwhite;
+  }
+
+  .mainPhaseContainer
+  {
+    flex-direction: column;
+    display:flex;
+    flex-flow: column nowrap;
+    height:100%;
+    width: 100%;;
+  }
+
+  .phaseTitle
+  {
+    height:50%;
+    font-size:24pt;
+    font-family: 'KesselBold';
+    text-align:center;
+  }
+
+  .phaseDescription
+  {
+    margin-top:40px;
+    height:50%;
+    font-size:24pt;
+    font-family: 'KesselNormal';
+    flex-grow: 1;
+    text-align:center;
+  }
+
+  .contentContainer
+  {
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width:100%;
+    z-index:2;
+  }
+/* clean-css ignore:start */
+  .imageBackgroundPhase
+  { 
+    position: absolute;
+    height: 50vh;
+    width: 50vw;
+    opacity:0.2!important;
+    z-index:1;
+    display:flex;
+    justify-content: center;
+  }
+/* clean-css ignore:end */
+.backgroundIconSmaller
+{    font-size:270pt;
+  color: #DB7B89;
+  height:auto !important;
+  width: auto !important;
+}
+
+
+  .backgroundIcon
+  {
+    font-size:300pt;
+    color: #DB7B89;
+    height:auto !important;
+    width: auto !important;
+  }
+
+  .phaseButtonContainer
+  {
+    align-self: center;
+    margin-top:auto;
+  }
+
+.wavelengthButtonDark
+{
+  background-color: #DB7B89 !important;
+}
+
+  .phaseCloseButton
+{
+  align-self: flex-end;
+  z-index:999;
+  cursor: pointer;
+}
+.phaseCloseButton:hover
+{
+  background-color: lightgray;
+}

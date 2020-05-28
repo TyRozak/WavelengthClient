@@ -1,0 +1,74 @@
+<div class="overlay-content" 
+[@slideContent]="animationState"
+(@slideContent.start)="onAnimationStart($event)"
+(@slideContent.done)="onAnimationDone($event)">
+    <div class="mainPhaseContainer" [style.display]="data.phase == 'Psychic'?'':'none'">
+        <div class="imageBackgroundPhase">
+            <mat-icon class="backgroundIcon">remove_red_eye</mat-icon>
+        </div>
+        <div class="contentContainer">
+            <mat-icon class="phaseCloseButton" (click)="closeDialog()">close</mat-icon>
+            <div class="phaseTitle">
+                It's the Psychic Round!
+            </div>
+            <div class="phaseDescription">
+                {{this.clientService.currentPsychic}} is the Psychic!
+            </div>
+            <div class="phaseButtonContainer">
+                <button class="wavelengthButtonDark wavelengthButton" mat-button 
+                    (click)="closeThisAndDisplayTutorial('psychic')">View The Psychic Round Rules</button> 
+            </div>
+        </div>
+    </div>
+    <div class="mainPhaseContainer" [style.display]="data.phase == 'Team'?'':'none'">
+        <div class="imageBackgroundPhase">
+            <mat-icon class="backgroundIcon">people_outline</mat-icon>
+        </div>
+        <div class="contentContainer">
+            <mat-icon class="phaseCloseButton" (click)="closeDialog()">close</mat-icon>
+            <div class="phaseTitle">
+                It's the Team Round!
+            </div>
+            <div class="phaseDescription">
+            </div>
+            <div class="phaseButtonContainer">
+                <button class="wavelengthButtonDark wavelengthButton" mat-button 
+                    (click)="closeThisAndDisplayTutorial('team')">View The Team Round Rules</button> 
+            </div>
+        </div>
+    </div>
+    <div class="mainPhaseContainer" [style.display]="data.phase == 'Side'?'':'none'">
+        <div class="imageBackgroundPhase">
+            <mat-icon class="backgroundIcon">compare_arrows</mat-icon>
+        </div>
+        <div class="contentContainer">
+            <mat-icon class="phaseCloseButton" (click)="closeDialog()">close</mat-icon>
+            <div class="phaseTitle">
+                It's the Left/Right Round!
+            </div>
+            <div class="phaseDescription">
+            </div>
+            <div class="phaseButtonContainer">
+                <button class="wavelengthButtonDark wavelengthButton" mat-button 
+                    (click)="closeThisAndDisplayTutorial('side')">View The Left/Right Round Rules</button> 
+            </div>
+        </div>
+    </div>
+    <div class="mainPhaseContainer" [style.display]="data.phase == 'Scoring'?'':'none'">
+        <div class="imageBackgroundPhase">
+            <mat-icon class="backgroundIconSmaller">grade</mat-icon>
+        </div>
+        <div class="contentContainer">
+            <mat-icon class="phaseCloseButton" (click)="closeDialog()">close</mat-icon>
+            <div class="phaseTitle">
+                It's the Scoring Round!
+            </div>
+            <div class="phaseDescription">
+            </div>
+            <div class="phaseButtonContainer">
+                <button class="wavelengthButtonDark wavelengthButton" mat-button 
+                    (click)="closeThisAndDisplayTutorial('scoring')">View The Scoring Round Rules</button> 
+            </div>
+        </div>
+    </div>
+</div>

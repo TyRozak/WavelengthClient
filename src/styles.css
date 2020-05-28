@@ -1,0 +1,109 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+@font-face {
+  font-family: 'KesselBold';
+  src: url("/assets/fonts/KesselBold.ttf") ;
+}
+
+@font-face {
+  font-family: 'KesselNormal';
+  src: url("/assets/fonts/KesselNormal.ttf") ;
+}
+
+body {
+  font-family: 'KesselBold' !important;
+  margin: 0;
+  background-image: linear-gradient(to top, #3f51b5 0%, #7676b8 80%);
+}
+
+.mainBody
+{
+  height: 97vh !important;
+  overflow: hidden;
+}
+
+.cdk-overlay-pane
+{
+    max-width: none !important;
+    overflow: hidden;
+}
+
+.mat-button
+{
+  font-family: 'KesselBold' !important;
+}
+
+.mat-step-text-label
+{
+  font-family: 'KesselBold' !important;
+}
+.mat-dialog-container 
+{
+    overflow:hidden !important;
+    
+  background-color: floralwhite;
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.dark-backdrop {
+  background: #000;
+  opacity: 0.85 !important;
+}
+
+.cdk-global-scrollblock
+{
+  overflow: hidden !important;
+  position: unset;
+}
+
+.mat-list-item-content
+{
+  width:100%;
+}
+
+.wavelengthButton
+{
+    color: white !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    border: 4px solid white !important;
+    display: inline-block !important;
+    transition: all 0.2s ease 0s !important;
+    margin:10px !important;
+    cursor: pointer;
+    font-family: 'KesselBold'
+}
+
+.wavelengthButtonDark
+{
+  background-color: #DB7B89 !important;
+}
+
+.wavelengthButton:hover
+{
+
+    color: white !important;
+    background: #DB7B89 !important;
+    border-color: white !important;
+    transition: all 0.2s ease 0s;
+}
+
+.wavelengthButton:disabled
+{
+
+    color: lightgray !important;
+    border-color: lightgray !important;
+    background: gray !important;
+    border-color: white !important;
+    transition: all 0.2s ease 0s;
+}
+
+.mat-horizontal-stepper-header .mat-step-icon
+{
+  background-color: #DB7B89 !important;
+}
+
+.mat-fab .mat-button-wrapper
+{
+  padding:0 !important;
+}

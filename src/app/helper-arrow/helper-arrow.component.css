@@ -1,0 +1,151 @@
+.helperContainerColumn
+{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.helperContainerColumnReverse
+{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column-reverse;
+}
+
+.helperContainerRow
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.clicker
+{
+  cursor: pointer;
+}
+
+.helperContainerRowReverse
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+}
+
+.helperArrowContainer
+{
+  display: flex;
+  align-content: center;
+}
+
+.helperTextContainer
+{ 
+  border: 3px solid white;
+  border-radius: 5px;
+  padding:5px;
+  text-align: center;
+  font-family: 'KesselBold';
+  background-color: lightgray;
+  color: rgb(34, 34, 34);
+  max-width: 250px;
+  white-space: pre-wrap
+}
+
+.helperArrow
+{
+  font-size: 4em;
+  color: #DB7B89;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+.fadeOutAnim
+{
+    opacity:0;
+}
+
+.textBottom
+{
+  align-self: flex-end;
+}
+
+.animUp {
+  animation: bounceUp 1s ease-in-out infinite;
+}
+.animLeft {
+  animation: bounceLeft 1s ease-in-out infinite;
+}
+.animRight {
+  animation: bounceRight 1s ease-in-out infinite;
+}  
+.animDown {
+  animation: bounceDown 1s ease-in-out infinite;
+}
+
+.point0Deg {
+    transform: rotate(0deg);
+  }
+.point90Deg {
+    transform: rotate(90deg);
+  }
+.point180Deg {
+    transform: rotate(180deg);
+  }  
+.point270Deg {
+    transform: rotate(270deg);
+  }
+
+  @keyframes bounceUp {
+    0%,
+    100% {
+      transform: translate(0, 0) ;
+    }
+  
+    50% {
+      transform: translate(0px, 10px);
+    }
+  }
+
+  @keyframes bounceDown {
+    0%,
+    100% {
+      transform: translate(0, 0) ;
+    }
+  
+    50% {
+      transform: translate(0px, -10px);
+    }
+  }
+
+  @keyframes bounceLeft {
+    0%,
+    100% {
+      transform: translate(0, 0) ;
+    }
+  
+    50% {
+      transform: translate(-10px, 0px);
+    }
+  }
+
+
+  @keyframes bounceRight {
+    0%,
+    100% {
+      transform: translate(0, 0) ;
+    }
+  
+    50% {
+      transform: translate(10px, 0px);
+    }
+  }
+

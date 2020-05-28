@@ -1,0 +1,360 @@
+<div class="row" (mousemove)="handleMouseMove($event)" (mouseup)="handleMouseUp($event)">
+    
+    <!-- Left Column -->
+    <div class="column15">
+        <!-- Team 1 Player Box -->
+        <div [classList]="this.clientService.currentPlayingTeam == 1? 
+            'playerContainer playingTeam': 
+            'playerContainer'" >
+            <div class="playerHeader">Team 1 Players</div>
+            <mat-list>
+                <mat-list-item class="playerCard" *ngFor="let player of (team1 || [])">
+                    <div class="playerItem">
+                        <span class="dot" [style.background-color]="player.color"></span>
+                        <span class="playerName" 
+                            [style.text-decoration]="this.clientService.getMe() && this.clientService.getMe().id == player.id?
+                                'underline':
+                                ''"
+                            [style.font-family]="this.clientService.getMe() && this.clientService.getMe().id == player.id?
+                                'KesselBold':
+                                ''">
+                            {{player.name}}
+                        </span>
+                        <div class="iconContainer">
+                            <img src="../../assets/eye.png"
+                                matTooltip="This player is the Psychic"
+                                class="eyeCon"
+                                [style.display]="player.isPsychic? '':'none'">
+                            <img src="../../assets/crown.png" 
+                                matTooltip="This player is their team's controller"
+                                class="eyeCon" 
+                                [style.display]="player.isGameController? '':'none'">
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <!-- Team 1 Score  -->
+        <div class="scoreContainer">
+            <div >
+                Team 1 Score:
+            </div>
+            <div class="scoreText" [innerHTML]="this.clientService.maxPoints != 0 ? 
+                                                    this.clientService.team1Score + ' / ' + this.clientService.maxPoints :
+                                                    this.clientService.team1Score + ' / &#8734;'"
+                [matTooltip]="this.clientService.maxPoints == 0? 'This game has no end score': ''">>
+            </div>
+        </div>
+    </div>
+
+    <!-- Middle Column -->
+    <div class="column70">
+
+        <!-- Main Spinner Container -->
+        <div class="imageContainer">
+
+            <!-- Hidden Height Setter for Absolute Position Fix -->
+            <img class="hiddenHeightSetter" src="../../assets/wavelengthcover.png">
+
+            <!-- Left/Right Controls -->
+            <div class="leftRightControls" [style.display]="this.clientService.currentPhase == 'Side'?'':'none'">
+                <button mat-button #leftButton
+                    [className]="this.clientService.leftButtonClicked?'wavelengthButtonSelected wavelengthButton':'wavelengthButton'"
+                     [disabled]="
+                    this.clientService.getMe() && 
+                    (this.clientService.getMe().isGameController && this.clientService.currentPhase == 'Side' && this.clientService.currentPlayingTeam != this.clientService.getMe().team) ?
+                    false:true" mat-button 
+                    (click)="leftClicked()">Left</button>
+                <button mat-button #rightButton
+                    [className]="!this.clientService.leftButtonClicked?'wavelengthButtonSelected wavelengthButton flex-right':'wavelengthButton flex-right'"
+                    [disabled]="
+                    this.clientService.getMe() && 
+                    (this.clientService.getMe().isGameController && this.clientService.currentPhase == 'Side' && this.clientService.currentPlayingTeam != this.clientService.getMe().team) ?
+                    false:true" mat-button 
+                    (click)="rightClicked()">Right</button>
+            </div>
+
+            <!-- Spinner Image -->
+            <img class="imageOverlap spinner responsive"
+                [style.transform]="'rotate(' + 
+                    (this.clientService.getMe() && this.clientService.getMe().isPsychic ? 
+                        this.clientService.currentRotationGoalForPsychic :
+                        this.clientService.currentRotationGoal)
+                    + 'deg)'"
+                 src="../../assets/wavelengthspinner.png">
+
+            <!-- Cover Image -->
+            <img [className]="this.clientService.getMe() && 
+                ((this.clientService.getMe().isPsychic && this.clientService.currentPhase =='Psychic')
+                 || this.clientService.revealed)? 
+                    'cover imageOverlap  responsive': 
+                    'coverRotate imageOverlap  responsive'"
+                src="../../assets/wavelengthcover.png">
+
+            <!-- Side Indicator -->
+            <img class="imageOverlap background responsive blink_me"
+                [style.visibility]="this.clientService.currentPhase == 'Side'?'visible':'hidden'"
+                [style.transform]="'rotate(' + (sideCoverAngle) + 'deg)'"
+                src="../../assets/sidecover.png">
+
+            <!-- Blue Container Image -->
+            <img class="imageOverlap background responsive" src="../../assets/wavelengthbackground.png">
+
+            <!-- Other Arm Container -->
+            <div class="armContainerOther" 
+                [style.visibility]="this.clientService.currentPhase != 'Side' || this.clientService.currentPhase != 'Scoring'?
+                    'visible':
+                    'hidden'"
+                *ngFor="let player of (currentTeamArray || [])"
+                [style.transform]="'rotate(' + (player.rotation ? player.rotation : 0) + 'deg)'">
+                <div class="armStyleOther" [style.background-color]="player? player.color: '#FFF'"></div>
+            </div>
+
+            <!-- My Arm Container -->
+            <div class="armContainerMe" #arm
+                [style.visibility]="this.clientService.getMe() && 
+                (this.clientService.currentPlayingTeam == this.clientService.getMe().team &&
+                 !this.clientService.getMe().isPsychic &&
+                 this.clientService.currentPhase != 'Side' && this.clientService.currentPhase != 'Scoring'
+                 )? 
+                    'visible':
+                    'hidden'"
+                (mousedown)="handleMouseDown($event)" 
+                [style.transform]="'rotate(' + (myArmDegree ? myArmDegree : 0) + 'deg)'">
+                <div #myArm class="armStyleMe"
+                    [style.background-color]="this.clientService.getMe() ? this.clientService.getMe().color:'#FFF'">
+                </div>
+            </div>
+
+            <!-- Locked In Arm Container -->
+            <div class="armContainerMe" #arm
+                [style.visibility]="this.clientService.currentPhase == 'Side' || this.clientService.currentPhase == 'Scoring'?
+                'visible':
+                'hidden'"
+                [style.transform]="'rotate(' + (lockedInArmDegree ? lockedInArmDegree : 0) + 'deg)'">
+                <div #myArm class="armStyleMe"
+                    [style.background-color]="'#000'">
+                </div>
+            </div>
+
+            <!-- Arm Dot Container -->
+            <div class="armDotContainer">
+                <span [style.background-color]="this.clientService.getMe()?this.clientService.getMe().color:'#FFF'"
+                    class="armDot">
+                </span>
+            </div>
+
+        </div>
+
+        <!-- Bottom Card Container -->
+        <div #answerCard class="cardContainer">
+
+            <!-- Left Half of Current Card -->
+            <div class="leftCard"
+                [style.background-color]="this.clientService.currentCard?
+                    this.clientService.currentCard.colorLeft:
+                    '#000'">
+
+                <!-- Arrow Image -->
+                <div>
+                    <img class="arrowImg" src="../../assets/leftarrow.png">
+                </div>
+
+                <!-- Card Title - Left -->
+                <div>
+                    {{this.clientService.currentCard?this.clientService.currentCard.textLeft:''}}
+                </div>
+            </div>
+
+            <!-- Right Half of Current Card -->
+            <div class="rightCard"
+                [style.background-color]="this.clientService.currentCard? 
+                    this.clientService.currentCard.colorRight:
+                    '$000'">
+                <!-- Arrow Image -->
+                <div>
+                    <img class="arrowImg" src="../../assets/rightarrow.png">
+                </div>
+                
+                <!-- Card Title - Right -->
+                <div>
+                    {{this.clientService.currentCard?this.clientService.currentCard.textRight:''}}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Right Column -->
+    <div class="column15r">
+
+        <!-- Team 2 Player Box -->
+        <div [classList]="this.clientService.currentPlayingTeam == 2? 
+            'playerContainerRight playingTeam': 
+            'playerContainerRight'" >
+            <div class="playerHeader">Team 2 Players</div>
+            <mat-list>
+                <mat-list-item class="playerCard" *ngFor="let player of (team2 || [])">
+                    <div class="playerItem">
+                        <span class="dot" [style.background-color] ="player.color"></span>
+                        <span class="playerName" 
+                            [style.text-decoration]="this.clientService.getMe() && this.clientService.getMe().id == player.id?
+                                'underline':
+                                ''"
+                            [style.font-family]="this.clientService.getMe() && this.clientService.getMe().id == player.id?
+                                'KesselBold':
+                                ''">
+                            {{player.name}}
+                        </span>
+                        <div class="iconContainer">
+                            <img src="../../assets/eye.png"
+                                matTooltip="This player is the Psychic"
+                                class="eyeCon"
+                                [style.display]="player.isPsychic? '':'none'">
+                            <img src="../../assets/crown.png" 
+                                matTooltip="This player is their team's controller"
+                                class="eyeCon" 
+                                [style.display]="player.isGameController? '':'none'">
+                        </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <!-- Team 2 Score Container -->
+        <div class="scoreContainer">
+            <div >
+                Team 2 Score:
+            </div>
+            <div class="scoreText" [innerHTML]="this.clientService.maxPoints != 0 ? 
+            this.clientService.team2Score + ' / ' + this.clientService.maxPoints :
+            this.clientService.team2Score + ' / &#8734;'"
+            [matTooltip]="this.clientService.maxPoints == 0? 'This game has no end score': ''">
+        </div>
+    </div>
+</div>
+
+<!-- Game Footer Bar for Controls -->
+<div class="gameFooter">
+
+    <!-- Left Half of Footer -->
+    <div class="infoPaneContainer"> 
+
+        <!-- Information About the Current Phase -->
+        <div class="phaseContainer" >
+                Current Phase: 
+                <mat-icon #phaseIndicatorPsychic class="phaseIcon" matTooltip="It is the Psychic Phase!"
+                    [style.display]="this.clientService.currentPhase =='Psychic'?'':'none'">
+                    remove_red_eye
+                </mat-icon>
+                <mat-icon #phaseIndicatorTeam class="phaseIcon" matTooltip="It is the Team Phase!"
+                    [style.display]="this.clientService.currentPhase =='Team'?'':'none'">
+                    people_outline
+                </mat-icon>
+                <mat-icon #phaseIndicatorSide class="phaseIcon" matTooltip="It is the Left/Right Phase!"
+                    [style.display]="this.clientService.currentPhase =='Side'?'':'none'">
+                    compare_arrows
+                </mat-icon>
+                <mat-icon #phaseIndicatorScoring class="phaseIcon" matTooltip="It is the Scoring Phase!"
+                    [style.display]="this.clientService.currentPhase =='Scoring'?'':'none'">
+                    grade
+                </mat-icon>
+        </div>
+
+        <!-- Tutorial Button -->
+        <div class="helpContainer">
+            <button class="wavelengthButton wavelengthButtonDark" mat-button (click)="  displayTutorial(true)">What do I do?</button>
+            <button class="wavelengthButton wavelengthButtonDark" mat-button (click)="advanceTurn()">Advance Turn</button>
+        </div>
+    </div>
+
+    <!-- Right Half of Footer for Psychic and Game Controls-->
+    <div class="controlsContainer"> 
+
+        <!-- Psychic Controls Box -->
+        <div class="psychicControls"
+            [style.display]=" this.clientService.getMe() && this.clientService.getMe().isPsychic?
+                '':
+                'none'">
+
+            <!-- Question Mark Tooltip at Top Right of Box -->
+            <mat-icon class="helperTooltipIcon"
+                matTooltip="You are the Psychic! Use these controls to move the game along!">
+                help_outline 
+            </mat-icon>
+
+            <div class="controlsTitle">Psychic Controls</div>
+
+            <!-- Psychic Given Clue Button -->
+            <button #psychicAnswerGivenButton mat-button
+                class="wavelengthButton wavelengthButtonDark" 
+                [disabled]="this.clientService.getMe() && 
+                            (this.clientService.getMe().isPsychic && this.clientService.currentPhase =='Psychic') ?
+                                false:
+                                true"
+                    matTooltip="Use this button after you have given the clue to your team!" 
+                (click)="advanceTurn()">
+                I have given my clue!
+            </button>
+
+            <!-- Psychic Reveal Button -->
+            <button mat-button #revealButton
+                class="wavelengthButton wavelengthButtonDark"
+                [disabled]="this.clientService.getMe() && 
+                            (this.clientService.getMe().isPsychic && this.clientService.currentPhase =='Scoring' && 
+                            !this.clientService.revealed) ?
+                                false:
+                                true" 
+                (click)="advanceTurn()"
+                matTooltip="Use this button to reveal the answer to your team!">
+                Reveal!
+            </button>
+
+            <!-- Psychic Next Turn button -->
+            <button mat-button #startNextTurnButton
+                class="wavelengthButton wavelengthButtonDark"
+                [disabled]="this.clientService.getMe() && 
+                            (this.clientService.getMe().isPsychic && this.clientService.currentPhase =='Scoring' && 
+                            this.clientService.revealed) ?
+                                false:
+                                true" 
+                (click)="advanceTurn()" 
+                mat-button matTooltip="This button will choose a new psychic and pass the turn to the other team.'
+                ">Start Next Turn
+            </button>
+        </div>
+
+        <!-- Game Controls Box -->
+        <div class="gameControls" 
+            [style.display]=" this.clientService.getMe() && this.clientService.getMe().isGameController?
+                 '': 
+                 'none'">
+
+            <!-- Question Mark Tooltip at Top Right of Box -->
+            <mat-icon class="helperTooltipIcon"
+                matTooltip="You are your team's game controller! Use these controls to move the game along!">
+                help_outline 
+            </mat-icon>
+
+            <div class="controlsTitle"> Game Controls</div>
+            
+            <!-- Submit Answer Button -->
+            <button mat-button  #gameControllerAnswerButton 
+                class="wavelengthButton wavelengthButtonDark"
+                [disabled]="this.clientService.getMe() && 
+                            ((this.clientService.getMe().isGameController && this.clientService.currentPhase == 'Team'
+                            && this.clientService.currentPlayingTeam == this.clientService.getMe().team) ||
+                            (this.clientService.getMe().isGameController && this.clientService.currentPhase == 'Side' && 
+                            this.clientService.currentPlayingTeam != this.clientService.getMe().team)) ?
+                                false:
+                                true" 
+                (click)="advanceTurn()">
+                Submit our answer!
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Transition UI Block -->
+<div #transitionBlock class="transitionBlock">

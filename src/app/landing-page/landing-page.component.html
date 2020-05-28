@@ -1,0 +1,37 @@
+
+<div class="pageContainer">
+    <div class="buttonContainer">
+        <button class="wavelengthButton landingPageButtonWave" mat-button (click)="openLandingDialog('create')">
+            <div class="landingPageButtonText">
+                Create Room
+            </div>
+        </button>
+        <button class="wavelengthButton landingPageButtonDoor" mat-button (click)="openLandingDialog('join')">
+            <div  class="landingPageButtonText">
+                Join Room
+            </div>
+        </button>
+    </div>
+</div>
+
+<div #waveWrapper class="waveWrapper waveAnimation">
+    <div class="waveWrapperInner bgTop">
+        <div class="wave waveTop">
+        </div>
+    </div>
+    <div class="waveWrapperInner bgMiddle">
+        <div class="wave waveMiddle" >
+        </div>
+    </div>
+    <div class="waveWrapperInner bgBottom">
+        <div class="wave waveBottom" >
+        </div>
+    </div>
+</div>
+
+<div #transitionBlock class="transitionBlock">
+
+    <div id="preload">
+        <img src="assets/door.png" />
+        <img src="assets/wave2.png" />
+        </div>

@@ -1,0 +1,15 @@
+.fill-remaining-space
+{
+    flex: 1 1 auto;
+}
+
+.mat-toolbar
+{
+    font-family: 'KesselBold' !important;
+}
+
+.wavelengthTitle
+{
+    cursor: pointer;
+}
+

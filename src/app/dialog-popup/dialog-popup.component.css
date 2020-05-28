@@ -1,0 +1,19 @@
+.colorBox
+{
+    margin-bottom:10px;
+}
+
+.okButton
+{
+    background:#673ab7;
+    color:white;
+}
+.headerDiv
+{
+  width:100%;
+}
+
+.mat-dialog-title
+{
+    font-family: 'KesselBold' !important;
+}

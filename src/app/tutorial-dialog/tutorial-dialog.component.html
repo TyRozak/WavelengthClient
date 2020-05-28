@@ -1,0 +1,167 @@
+<div class="tutorialHeader">
+    Wavelength Tutorial
+    <mat-icon class="tutorialCloseButton" (click)="closeDialog()">close</mat-icon>
+</div>
+<button mat-fab class="forwardButton" (click)="goForward()" [style.display]="forwardButtonVisible? '':'none'">
+    <mat-icon class="stepperButtonIcon">fast_forward</mat-icon>
+  </button>
+  <button mat-fab class="backButton" (click)="goBack()"  [style.display]="backButtonVisible? '':'none'">
+    <mat-icon class="stepperButtonIcon">fast_rewind</mat-icon>
+  </button>
+
+  <button mat-fab class="forwardButton" (click)="closeDialog()"  [style.display]="doneButtonVisible? '':'none'">
+    <mat-icon class="stepperButtonIcon">done</mat-icon>
+  </button>
+<mat-horizontal-stepper (selectionChange)="indexChanged($event)" #stepper class="stepper" [linear]="false" #stepper>
+    <mat-step label="Overview">
+        <div class="row">
+            <div class="tutorialContainer">
+                <div class="tutorialBlock">
+                    Wavelength is a social guessing game where two teams compete to read each other's minds.
+                </div>
+                <div class="tutorialBlock">
+                    Teams take turns rotating a dial to where they <span class="boldText">think</span> a target is
+                    located along a spectrum that's
+                    hidden behind a screen.
+                </div>
+                <div class="tutorialBlock">
+                    One player from the active team, <span class="boldText">"the Psychic"</span>, knows where the
+                    target is, but can only give a clue
+                    <span class="boldText">ON THE SPECTRUM</span> between two opposing concepts. After that, their
+                    team- mates have to guess where the target
+                    is.
+                </div>
+                <div class="tutorialBlockTop">
+                    <div class="">
+                        Your team's goal:
+                    </div>
+                    <img src="../../assets/tutorial-1.jpg">
+                    <div class="tutorialBlockTop">
+                        Turn the red dial as close to the center of the colored target as you can.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step label="The Twist">
+        <div class="row">
+            <div class="tutorialContainer">
+                <div class="tutorialBlock">
+                    <div class="tutorialBlock">
+                        <span class="boldText">Here's the twist:</span>
+                    </div>
+                    <img src="../../assets/tutorial-2.jpg">
+                </div>
+                <div class="tutorialBlock">
+                    The target is <span class="boldText">completely hidden</span> behind this blue screen and is in a
+                    random location each
+                    round.
+                </div>
+                <div class="tutorialBlock">
+                    <div class="tutorialBlock">
+                        Fortunately, one of your teammates is psychic and knows <span class="boldText">exactly where the
+                            target is!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-step>
+    <mat-step label="Psychic Round">
+        <div class="tutorialContainer">
+            <div class="tutorialBlock">
+                <div class="tutorialBlockSmall">
+                    They draw a card that has <span class="boldText">two opposing concepts</span> on it, like
+                    "Underrated - Overrated" or
+                    "Hot - Cold".</div>
+                <img src="../../assets/tutorial-3.jpg">
+            </div>
+            <div class="tutorialBlock">
+                <div class="tutorialBlockSmall">
+                    The psychic gives a clue where the target is located on the <span class="boldText">spectrum</span>
+                    between the two concepts.</div>
+                <img src="../../assets/tutorial-4.jpg">
+            </div>
+            <div class="tutorialBlockSmall">
+                In this example, the target is <span class="boldText">slightly</span> to the "hot" side, so the Psychic
+                says "Coffee" since coffee
+                is hot, but <span class="boldText">not the hottest thing imaginable.</span>
+            </div>
+        </div>
+    </mat-step>
+
+    <mat-step label="Team Round">
+        <div class="row">
+            <div class="tutorialContainer">
+                <div class="tutorialBlock">
+                    <div class="tutorialBlock">
+                        Now it's up to the psychic's team to <span class="boldText">discuss</span> the clue and decide
+                        where to turn the dial.</div>
+                    <img src="../../assets/tutorial-5.jpg">
+                </div>
+                <div class="tutorialBlock">
+                    <span class="boldText">Everyone thinks out loud</span> and ponders very dumb ideas-all while the
+                    other team <span class="boldText">poisons your brain
+                        with bad suggestions.</span>
+                </div>
+            </div>
+        </div>
+    </mat-step>
+
+    <mat-step label="Left/Right Round">
+        <div class="row">
+
+            <div class="tutorialContainer">
+                <div class="tutorialBlock">
+                    In Wavelength, <span class="boldText">BOTH</span> teams always have a chance to score points from a
+                    clue.
+                </div>
+                <div class="tutorialBlock">
+                    <div class="tutorialBlock">
+                        After the Psychic's team has finalized their dial position, the other team gets to guess whether
+                        the
+                        center of the target (the 4 point wedge) is to the<span class="boldText"> left or right of the
+                            dial.</span>
+                    </div>
+                    <img src="../../assets/tutorial-7.jpg">
+                </div>
+                <div class="tutorialBlock">
+                    This discussion should be fairly brief, since it's a simple binary choice: <span
+                        class="boldText">LEFT or RIGHT.</span>
+                </div>
+            </div>
+
+        </div>
+    </mat-step>
+
+    <mat-step label="Scoring Round">
+        <div class="row">
+
+            <div class="tutorialContainer">
+                <div class="tutorialBlock">
+                    <div class="tutorialBlock">
+                        Finally, the psychic opens the screen to reveal whether the dial is in the target area.
+                    </div>
+                    <img src="../../assets/tutorial-6.jpg">
+                </div>
+                <div class="tutorialBlock">
+                    The psychic's team will score points based on <span class="boldText">how close their guess was to
+                        the target</span>,
+                </div>
+                <div class="tutorialBlock">
+                    The opposing team will score a point <span class="boldText">if they correctly guessed Left vs.
+                        Right</span>.
+                </div>
+                <div class="tutorialBlock">
+                    The first to <span class="boldText">10 </span>(or whatever score you like) <span
+                        class="boldText">wins!</span>
+                </div>
+            </div>
+
+        </div>
+    </mat-step>
+
+    <ng-template matStepperIcon="edit">
+        <mat-icon>check_circle_outline</mat-icon>
+    </ng-template>
+
+</mat-horizontal-stepper>
